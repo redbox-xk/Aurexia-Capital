@@ -29,31 +29,31 @@ export function DashboardOverview({ wallets, transactions, totalBalance, userNam
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Welcome Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
+      <div className="mb-10">
+        <div className="flex items-center gap-3 mb-3">
           <Logo size="sm" showText={false} />
-          <h1 className="text-2xl font-bold text-foreground">
-            Welcome back, {userName.split(" ")[0]}
+          <h1 className="text-3xl font-bold text-foreground">
+            Welcome, {userName.split(" ")[0]}
           </h1>
         </div>
-        <p className="text-muted-foreground">
-          {"Here's an overview of your Flash Wallet"}
+        <p className="text-lg text-muted-foreground font-light">
+          Your financial home is safe and secure. Here's your complete picture.
         </p>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <Card className="bg-card border-border">
+        <Card className="bg-gradient-to-br from-primary/5 to-transparent border-border/50 hover:border-primary/30 transition-all">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Total Balance</p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-sm text-muted-foreground mb-2 font-medium">Your Wealth</p>
+                <p className="text-4xl font-bold text-foreground">
                   {formatCurrency(totalBalance)}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-primary" />
+              <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center">
+                <TrendingUp className="w-7 h-7 text-primary" />
               </div>
             </div>
           </CardContent>

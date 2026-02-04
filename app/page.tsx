@@ -33,113 +33,113 @@ export default function Page() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <Logo size="xl" showText={false} />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
-            Your Digital Assets,{" "}
-            <span className="text-primary">Lightning Fast</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 text-balance leading-tight">
+            Peace of Mind for Your{" "}
+            <span className="text-primary">Digital Life</span>
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-            Flash Wallet gives you complete control over your crypto portfolio with multi-wallet support, instant transactions, and enterprise-grade security.
+          <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 text-pretty leading-relaxed font-light">
+            Experience complete freedom and security. Flash Wallet puts you in control of your assets with a beautifully simple interface, military-grade protection, and the speed you deserve.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild className="text-lg px-8">
+            <Button size="lg" asChild className="text-lg px-10 h-14 rounded-lg">
               <Link href="/auth/sign-up">
-                Create Free Account
+                Start Your Journey
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="text-lg px-8 bg-transparent">
-              <Link href="/auth/login">Sign In</Link>
+            <Button size="lg" variant="outline" asChild className="text-lg px-10 h-14 rounded-lg border-2 bg-transparent">
+              <Link href="/auth/login">Welcome Back</Link>
             </Button>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/30 to-transparent">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Everything You Need
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 text-balance">
+              Designed for Your Trust
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Powerful features to manage your digital assets with confidence
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
+              We've built Flash Wallet with every detail considered for your peace of mind and financial freedom.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Wallet className="w-6 h-6 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <Wallet className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Multi-Wallet Support</h3>
-                <p className="text-muted-foreground">
-                  Create and manage multiple wallets from a single dashboard. Organize by purpose or asset type.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Organized Wallets</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Manage unlimited wallets in one beautiful place. Keep your assets organized exactly how you want them.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6 text-primary" />
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <Zap className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Instant Transfers</h3>
-                <p className="text-muted-foreground">
-                  Send and receive assets instantly with our optimized transaction processing system.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Lightning Speed</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Send and receive instantly. No delays, no complications—just pure, fast transactions.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Shield className="w-6 h-6 text-primary" />
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <Shield className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Bank-Grade Security</h3>
-                <p className="text-muted-foreground">
-                  Your assets are protected with industry-leading encryption and security protocols.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Unbreakable Security</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Your assets sleep peacefully. Military-grade encryption keeps everything safe and secure.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <ArrowUpRight className="w-6 h-6 text-primary" />
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <ArrowUpRight className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Easy Sending</h3>
-                <p className="text-muted-foreground">
-                  Send to any address with a simple, intuitive interface. Save contacts for quick transfers.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Effortless Sending</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Send with confidence. Intuitive interface, saved contacts, and clear confirmations every step.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <ArrowDownLeft className="w-6 h-6 text-primary" />
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <ArrowDownLeft className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Quick Receive</h3>
-                <p className="text-muted-foreground">
-                  Generate QR codes and share your wallet address easily to receive funds from anyone.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Easy Receiving</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Share your address or QR code with anyone. Receive funds from anywhere, instantly.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border hover:border-primary/50 transition-colors">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Globe className="w-6 h-6 text-primary" />
+            <Card className="bg-card border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-6">
+                  <Globe className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Global Access</h3>
-                <p className="text-muted-foreground">
-                  Access your wallet from anywhere in the world. Desktop, tablet, or mobile - we have you covered.
+                <h3 className="text-xl font-semibold text-foreground mb-3">Always Accessible</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Your wallet follows you everywhere. Desktop, mobile, tablet—seamless access worldwide.
                 </p>
               </CardContent>
             </Card>
@@ -148,20 +148,20 @@ export default function Page() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/10 to-transparent">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-8">
             <Logo size="lg" showText={false} />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Ready to Get Started?
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 text-balance">
+            Your Financial Freedom Awaits
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of users who trust Flash Wallet with their digital assets
+          <p className="text-xl text-muted-foreground mb-12 leading-relaxed font-light">
+            Join thousands of users who've discovered the confidence of true ownership. Start your Flash Wallet journey today.
           </p>
-          <Button size="lg" asChild className="text-lg px-8">
+          <Button size="lg" asChild className="text-lg px-10 h-14 rounded-lg">
             <Link href="/auth/sign-up">
-              Create Your Free Wallet
+              Create Wallet Now
               <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

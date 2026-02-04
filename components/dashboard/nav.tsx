@@ -57,12 +57,13 @@ export function DashboardNav({ user }: DashboardNavProps) {
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden md:block border-b border-border bg-card sticky top-0 z-50">
+      <header className="hidden md:block border-b border-border/50 bg-gradient-to-r from-card to-card via-muted/5 sticky top-0 z-50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-8">
-              <Link href="/dashboard">
+            <div className="flex items-center gap-10">
+              <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <Logo size="md" />
+                <span className="hidden lg:inline text-sm font-semibold text-foreground">Flash Wallet</span>
               </Link>
               <nav className="flex items-center gap-1">
                 {navItems.map((item) => {
@@ -131,10 +132,11 @@ export function DashboardNav({ user }: DashboardNavProps) {
       </header>
 
       {/* Mobile Header */}
-      <header className="md:hidden border-b border-border bg-card sticky top-0 z-50">
+      <header className="md:hidden border-b border-border/50 bg-gradient-to-r from-card to-muted/5 sticky top-0 z-50">
         <div className="flex items-center justify-between h-14 px-4">
-          <Link href="/dashboard">
+          <Link href="/dashboard" className="flex items-center gap-1 hover:opacity-80 transition-opacity">
             <Logo size="sm" />
+            <span className="text-xs font-semibold text-foreground">FW</span>
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -176,7 +178,7 @@ export function DashboardNav({ user }: DashboardNavProps) {
       </header>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t border-border bg-card z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t border-border/50 bg-gradient-to-t from-card via-card to-card/95 z-50 backdrop-blur-sm">
         <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const isActive = pathname === item.href

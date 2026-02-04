@@ -42,20 +42,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
-      <div className="absolute top-6 left-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 p-4">
+      <div className="absolute top-8 left-8">
         <Link href="/">
           <Logo size="md" />
         </Link>
       </div>
 
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
+      <Card className="w-full max-w-md shadow-xl border-border/40">
+        <CardHeader className="text-center pb-8">
+          <div className="flex justify-center mb-6">
             <Logo size="lg" showText={false} />
           </div>
-          <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to your Flash Wallet account</CardDescription>
+          <CardTitle className="text-3xl font-bold text-foreground">Welcome Back</CardTitle>
+          <CardDescription className="text-base mt-2">
+            Your secure financial home awaits. Let's reconnect.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,22 +90,16 @@ export default function LoginPage() {
               </div>
             )}
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign in"
-              )}
-            </Button>
+          <Button type="submit" className="w-full h-12 text-base font-medium rounded-lg" disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading ? "Welcoming you in..." : "Enter Your Wallet"}
+          </Button>
           </form>
 
           <div className="mt-6 text-center text-sm text-muted-foreground">
-            {"Don't have an account? "}
-            <Link href="/auth/sign-up" className="text-primary font-medium hover:underline">
-              Sign up
+            New to Flash Wallet?{" "}
+            <Link href="/auth/sign-up" className="text-primary font-semibold hover:underline">
+              Start your journey
             </Link>
           </div>
         </CardContent>
