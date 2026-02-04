@@ -91,6 +91,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    // @ts-expect-error - tailwindcss-animate doesn't have TypeScript definitions
+    require('tailwindcss-animate'),
+  ],
 }
 export default config
