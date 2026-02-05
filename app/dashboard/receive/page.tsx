@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { ReceiveForm } from "@/components/dashboard/receive-form"
+import { ReceiveWeb3 } from "@/components/dashboard/receive-web3"
 import { redirect } from "next/navigation"
 
 export default async function ReceivePage() {
@@ -16,5 +16,21 @@ export default async function ReceivePage() {
     redirect("/dashboard/wallets")
   }
 
-  return <ReceiveForm wallets={wallets} />
+  const primaryWallet = wallets[0]
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">Receive Crypto</h1>
+        <p className="text-muted-foreground mt-2">
+          Share your wallet address to receive {primaryWallet.network}
+        </p>
+      </div>
+      <ReceiveWeb3
+        address={primaryWallet.address}
+        network={primaryWallet.network}
+        walletName={primaryWallet.name}
+      />
+    </div>
+  )
 }

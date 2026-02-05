@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { SendForm } from "@/components/dashboard/send-form"
+import { SendWeb3 } from "@/components/dashboard/send-web3"
 import { redirect } from "next/navigation"
 
 export default async function SendPage() {
@@ -16,5 +16,21 @@ export default async function SendPage() {
     redirect("/dashboard/wallets")
   }
 
-  return <SendForm wallets={wallets} />
+  const primaryWallet = wallets[0]
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">Send Transaction</h1>
+        <p className="text-muted-foreground mt-2">
+          Send {primaryWallet.network} from your wallet to any address
+        </p>
+      </div>
+      <SendWeb3
+        fromAddress={primaryWallet.address}
+        balance={primaryWallet.balance}
+        network={primaryWallet.network}
+      />
+    </div>
+  )
 }

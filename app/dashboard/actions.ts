@@ -2,7 +2,8 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
-import { generateWalletAddress } from "@/lib/wallet-utils"
+import { createNewWallet } from "@/lib/web3/wallet"
+import { getBalance } from "@/lib/web3/blockchain"
 
 export async function getWallets() {
   const supabase = await createClient()
@@ -23,10 +24,22 @@ export async function getWallets() {
     return { error: error.message, wallets: [] }
   }
 
-  return { wallets: wallets || [], error: null }
+  // Fetch real balances from blockchain for each wallet
+  const walletsWithBalances = await Promise.all(
+    (wallets || []).map(async (wallet) => {
+      try {
+        const balanceData = await getBalance(wallet.address, wallet.network || 'ethereum')
+        return { ...wallet, balance: balanceData.formatted }
+      } catch {
+        return wallet
+      }
+    })
+  )
+
+  return { wallets: walletsWithBalances, error: null }
 }
 
-export async function createWallet(name: string, currency: string = "USD") {
+export async function createWallet(name: string, network: string = 'ethereum') {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   
@@ -34,34 +47,52 @@ export async function createWallet(name: string, currency: string = "USD") {
     return { error: "Not authenticated" }
   }
 
-  // Check if this is the first wallet (make it primary)
-  const { data: existingWallets } = await supabase
-    .from("wallets")
-    .select("id")
-    .eq("user_id", user.id)
+  try {
+    // Generate real Ethereum wallet
+    const newWallet = await createNewWallet()
 
-  const isPrimary = !existingWallets || existingWallets.length === 0
+    // Check if this is the first wallet (make it primary)
+    const { data: existingWallets } = await supabase
+      .from("wallets")
+      .select("id")
+      .eq("user_id", user.id)
 
-  const { data: wallet, error } = await supabase
-    .from("wallets")
-    .insert({
-      user_id: user.id,
-      name,
-      address: generateWalletAddress(),
-      balance: 0,
-      currency,
-      is_primary: isPrimary,
-    })
-    .select()
-    .single()
+    const isPrimary = !existingWallets || existingWallets.length === 0
 
-  if (error) {
-    return { error: error.message }
+    // Fetch initial balance from blockchain
+    let initialBalance = "0"
+    try {
+      const balanceData = await getBalance(newWallet.address, network as any)
+      initialBalance = balanceData.formatted
+    } catch (err) {
+      console.error("Failed to fetch balance:", err)
+    }
+
+    const { data: wallet, error } = await supabase
+      .from("wallets")
+      .insert({
+        user_id: user.id,
+        name,
+        address: newWallet.address,
+        public_key: newWallet.publicKey,
+        balance: initialBalance,
+        network,
+        is_primary: isPrimary,
+      })
+      .select()
+      .single()
+
+    if (error) {
+      return { error: error.message }
+    }
+
+    revalidatePath("/dashboard")
+    revalidatePath("/dashboard/wallets")
+    return { wallet, error: null }
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Failed to create wallet"
+    return { error: message }
   }
-
-  revalidatePath("/dashboard")
-  revalidatePath("/dashboard/wallets")
-  return { wallet, error: null }
 }
 
 export async function updateWallet(walletId: string, updates: { name?: string; is_primary?: boolean }) {
