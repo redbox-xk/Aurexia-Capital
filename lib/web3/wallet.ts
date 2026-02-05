@@ -130,14 +130,6 @@ export function deriveAddressFromPrivateKey(privateKey: string): string {
   return wallet.address
 }
 
-export function getExplorerUrl(
-  address: string,
-  networkKey: NetworkKey = 'ethereum'
-): string {
-  const network = NETWORKS[networkKey]
-  return `${network.blockExplorer}/address/${address}`
-}
-
 export function getTransactionUrl(
   hash: string,
   networkKey: NetworkKey = 'ethereum'
