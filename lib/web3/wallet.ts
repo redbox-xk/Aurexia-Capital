@@ -145,3 +145,37 @@ export function getTransactionUrl(
   const network = NETWORKS[networkKey]
   return `${network.blockExplorer}/tx/${hash}`
 }
+
+export function formatAddress(address: string): string {
+  if (!address || address.length < 10) return address
+  return address.slice(0, 6) + '...' + address.slice(-4)
+}
+
+export async function validateAddress(address: string): Promise<boolean> {
+  return ethers.isAddress(address)
+}
+
+export async function estimateGasTransfer(
+  from: string,
+  to: string,
+  amount: string,
+  networkKey: NetworkKey = 'ethereum'
+): Promise<string> {
+  const network = NETWORKS[networkKey]
+  const provider = new ethers.JsonRpcProvider(network.rpc)
+  
+  try {
+    const gasEstimate = await provider.estimateGas({
+      from,
+      to,
+      value: ethers.parseUnits(amount, network.decimals),
+    })
+    
+    const gasPrice = await provider.getGasPrice()
+    const gasCost = gasEstimate * gasPrice
+    
+    return ethers.formatUnits(gasCost, network.decimals)
+  } catch {
+    return '0'
+  }
+}
