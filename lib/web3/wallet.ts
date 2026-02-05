@@ -171,3 +171,11 @@ export async function estimateGasTransfer(
     return '0'
   }
 }
+
+export function getExplorerUrl(
+  address: string,
+  networkKey: NetworkKey = 'ethereum'
+): string {
+  const network = NETWORKS[networkKey]
+  return `${network.blockExplorer}/address/${address}`
+}
