@@ -1,5 +1,3 @@
-'use client';
-
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -53,9 +51,9 @@ export default async function ReceivePage() {
 
           <div className="flex gap-2">
             <Button
-              onClick={() => navigator.clipboard.writeText(primaryWallet.address)}
               variant="outline"
               className="flex-1"
+              disabled
             >
               Copy Address
             </Button>
