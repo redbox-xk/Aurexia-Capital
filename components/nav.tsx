@@ -30,6 +30,9 @@ export function Navigation() {
             <Link href="/services" className="text-sm hover:text-primary transition">
               {t.nav.services}
             </Link>
+            <Link href="/markets" className="text-sm hover:text-primary transition">
+              Markets
+            </Link>
             <Link href="/insights" className="text-sm hover:text-primary transition">
               {t.nav.insights}
             </Link>

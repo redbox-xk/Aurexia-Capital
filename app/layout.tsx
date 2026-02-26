@@ -6,6 +6,7 @@ import { I18nProvider } from '@/lib/i18n/context'
 import { AuthProvider } from '@/lib/auth/auth-context'
 import { ConsentBanner } from '@/components/consent-banner'
 import { AnalyticsInitializer } from '@/components/analytics-initializer'
+import { StockTickerBanner } from '@/components/stock-ticker-banner'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -77,6 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
+        <StockTickerBanner />
         <AuthProvider>
           <I18nProvider>
             {children}
