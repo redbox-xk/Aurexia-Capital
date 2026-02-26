@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { Card, CardContent } from '@/components/ui/card'
 import { Users, Shield, Target, Award } from 'lucide-react'
 
+export const dynamic = "force-dynamic"
 export default function About() {
   const { t } = useI18n()
 
