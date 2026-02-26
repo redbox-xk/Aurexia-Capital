@@ -6,9 +6,9 @@ export default function AboutClient() {
   const { t } = useI18n()
 
   return (
-    <div>
-      <h1>{t("about.title")}</h1>
-      <p>{t("about.description")}</p>
-    </div>
+    <main className="px-6 py-12">
+      <h1 className="text-4xl font-bold mb-4">{t.home.tagline}</h1>
+      <p className="text-lg text-gray-700">{t.home.description}</p>
+    </main>
   )
 }
