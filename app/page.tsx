@@ -1,5 +1,6 @@
-import AboutClient from "./AboutClient"
+// app/page.tsx
+import HomeClient from "./HomeClient"
 
-export default function AboutPage() {
-  return <AboutClient />
+export default function HomePage() {
+  return <HomeClient />
 }

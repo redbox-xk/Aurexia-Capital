@@ -2,23 +2,37 @@
 
 export const translations = {
   en: {
+    nav: {
+      home: "Home",
+      about: "About",
+    },
     home: {
-      tagline: "Institutional Wealth Advisory",
-      title: "Strategic Wealth for Discerning Investors",
+      title: "Aurexia Capital",
+      description: "Institutional Wealth Advisory & Digital Asset Strategy",
+    },
+    about: {
+      title: "About Aurexia",
       description:
-        "Strategic financial guidance for discerning investors",
-      schedule: "Schedule Consultation",
-      learn: "Learn More"
-    }
+        "Aurexia Capital delivers modern capital solutions with institutional precision.",
+    },
   },
   sq: {
+    nav: {
+      home: "Ballina",
+      about: "Rreth Nesh",
+    },
     home: {
-      tagline: "Këshillim Institucional për Pasuri",
-      title: "Strategji Pasurie për Investitorë Elitarë",
+      title: "Aurexia Capital",
       description:
-        "Udhëzim financiar strategjik për investitorë të dalluar",
-      schedule: "Rezervo Konsultim",
-      learn: "Mëso më shumë"
-    }
-  }
+        "Këshillim Institucional i Pasurisë & Strategji e Aseteve Digjitale",
+    },
+    about: {
+      title: "Rreth Aurexia",
+      description:
+        "Aurexia Capital ofron zgjidhje moderne kapitali me saktësi institucionale.",
+    },
+  },
 }
+
+export type Language = keyof typeof translations
+export type TranslationSchema = typeof translations.en
