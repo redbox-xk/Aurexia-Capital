@@ -1,3 +1,4 @@
+"use client"
 import "./globals.css"
 import { ReactNode } from "react"
 import { I18nProvider } from "@/lib/i18n"
