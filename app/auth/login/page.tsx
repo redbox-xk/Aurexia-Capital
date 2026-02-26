@@ -1,109 +1,113 @@
-"use client"
+'use client'
 
-import React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Logo } from "@/components/logo"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { createClient } from "@/lib/supabase/client"
-import { Loader2 } from "lucide-react"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/lib/auth/auth-context'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from 'next/link'
+import { AlertCircle, Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { login, isLoading } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  async function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setError(null)
+    setError('')
 
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-
-    if (error) {
-      setError(error.message)
-      setLoading(false)
-      return
+    try {
+      await login(email, password)
+      router.push('/dashboard')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed')
     }
-
-    router.push("/dashboard")
-    router.refresh()
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 p-4">
+    <div className="min-h-screen bg-gradient-to-b from-muted/50 to-transparent pt-20 pb-12 flex flex-col items-center">
       <div className="absolute top-8 left-8">
         <Link href="/">
-          <Logo size="md" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <span className="text-primary-foreground font-playfair font-bold">A</span>
+            </div>
+            <span className="font-playfair font-semibold hidden sm:inline">Aurexia</span>
+          </div>
         </Link>
       </div>
 
-      <Card className="w-full max-w-md shadow-xl border-border/40">
-        <CardHeader className="text-center pb-8">
-          <div className="flex justify-center mb-6">
-            <Logo size="lg" showText={false} />
-          </div>
-          <CardTitle className="text-3xl font-bold text-foreground">Welcome Back</CardTitle>
-          <CardDescription className="text-base mt-2">
-            Your secure financial home awaits. Let's reconnect.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+      <div className="w-full max-w-md px-4">
+        <Card className="shadow-lg border-border/40">
+          <CardHeader className="text-center pb-8">
+            <h1 className="text-3xl font-playfair font-bold mb-2">Client Login</h1>
+            <p className="text-muted-foreground">Secure access to your portfolio</p>
+          </CardHeader>
+          <CardContent>
+            {/* Demo Credentials Info */}
+            <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded p-3 mb-6 text-sm">
+              <p className="text-blue-900 dark:text-blue-100 font-medium mb-2">Demo Access:</p>
+              <ul className="text-blue-800 dark:text-blue-200 space-y-1 text-xs font-mono">
+                <li>Email: client@aurexia.com</li>
+                <li>Password: demo123</li>
+              </ul>
             </div>
 
-            {error && (
-              <div className="text-sm text-destructive bg-destructive/10 p-3 rounded-md">
-                {error}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="bg-destructive/10 border border-destructive/30 rounded p-4 flex gap-3">
+                  <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-destructive">{error}</p>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium mb-2">Email Address</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-border rounded bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="your@email.com"
+                  required
+                  disabled={isLoading}
+                />
               </div>
-            )}
 
-          <Button type="submit" className="w-full h-12 text-base font-medium rounded-lg" disabled={loading}>
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {loading ? "Welcoming you in..." : "Enter Your Wallet"}
-          </Button>
-          </form>
+              <div>
+                <label className="block text-sm font-medium mb-2">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 border border-border rounded bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="••••••••"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
 
-          <div className="mt-6 text-center text-sm text-muted-foreground">
-            New to Flash Wallet?{" "}
-            <Link href="/auth/sign-up" className="text-primary font-semibold hover:underline">
-              Start your journey
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+              <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  'Sign In to Portal'
+                )}
+              </Button>
+            </form>
+
+            <p className="text-center text-sm text-muted-foreground mt-8">
+              Questions? <Link href="/contact" className="text-primary hover:underline font-medium">Contact support</Link>
+            </p>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

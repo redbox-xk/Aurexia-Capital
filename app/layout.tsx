@@ -1,49 +1,53 @@
-import React from "react"
+import React from 'react'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
+import { I18nProvider } from '@/lib/i18n/context'
+import { AuthProvider } from '@/lib/auth/auth-context'
+import { GDPRBanner } from '@/components/gdpr-banner'
 
-const _geist = Geist({ subsets: ['latin'] })
-const _geistMono = Geist_Mono({ subsets: ['latin'] })
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  weight: ['400', '500', '600', '700'],
+})
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
-  title: 'Flash Wallet - Secure Crypto Wallet Management',
-  description: 'Flash Wallet is a secure, easy-to-use cryptocurrency wallet for managing multiple wallets, sending, receiving, and mining crypto on the blockchain. Control your digital assets with military-grade security and a beautiful interface.',
-  keywords: 'crypto wallet, bitcoin wallet, ethereum wallet, blockchain, crypto management, secure wallet, digital assets',
-  creator: 'Flash Wallet Team',
-  generator: 'Flash Wallet v1.0.0',
-  metadataBase: new URL('https://flashwallet.app'),
+  title: 'Aurexia Capital - Institutional Wealth Advisory',
+  description: 'Premium institutional wealth management and financial advisory for discerning investors in Kosovo and Southeast Europe. Offering portfolio management, risk advisory, and tax strategy with bank-grade security and GDPR compliance.',
+  keywords: 'wealth management, institutional advisory, portfolio management, Kosovo, financial advisor, investment strategy, risk management',
+  creator: 'Aurexia Capital',
+  generator: 'Aurexia Capital v1.0',
+  metadataBase: new URL('https://aurexiacapital.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://flashwallet.app',
-    siteName: 'Flash Wallet',
-    title: 'Flash Wallet - Your Secure Crypto Wallet',
-    description: 'Manage, send, receive, and mine cryptocurrency with enterprise-grade security.',
+    url: 'https://aurexiacapital.com',
+    siteName: 'Aurexia Capital',
+    title: 'Aurexia Capital - Institutional Wealth Advisory',
+    description: 'Strategic financial guidance for discerning investors across Southeast Europe',
     images: [
       {
-        url: '/fw-logo.svg',
-        width: 160,
-        height: 160,
-        alt: 'Flash Wallet Logo',
+        url: '/aurexia-logo.svg',
+        width: 200,
+        height: 60,
+        alt: 'Aurexia Capital Logo',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Flash Wallet - Secure Crypto Management',
-    description: 'Your trusted platform for cryptocurrency wallets and blockchain transactions',
-    images: ['/fw-logo.svg'],
+    title: 'Aurexia Capital - Wealth Management',
+    description: 'Institutional advisory for discerning investors',
+    images: ['/aurexia-logo.svg'],
   },
   icons: {
-    icon: '/fw-logo.svg',
-    apple: '/fw-logo.svg',
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
+    icon: '/aurexia-icon.svg',
+    apple: '/aurexia-icon.svg',
   },
 }
 
@@ -53,8 +57,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground">
+        <AuthProvider>
+          <I18nProvider>
+            {children}
+            <GDPRBanner />
+          </I18nProvider>
+        </AuthProvider>
+      </body>
     </html>
   )
 }
