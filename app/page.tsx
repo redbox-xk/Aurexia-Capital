@@ -1,194 +1,163 @@
-'use client'
+"use client"
 
-import { useI18n } from '@/lib/i18n/context'
-import { Navigation } from '@/components/nav'
-import { Footer } from '@/components/footer'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ArrowRight, TrendingUp, Lock, FileText, Users } from 'lucide-react'
+import { useI18n } from "@/lib/i18n"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
   const { t } = useI18n()
+  const router = useRouter()
 
   return (
-    <>
-      <Navigation />
-      <main>
-        {/* Hero Section */}
-        <section className="min-h-[calc(100vh-64px)] pt-32 pb-16 flex items-center bg-gradient-to-b from-muted/50 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <span className="inline-block bg-secondary/20 text-secondary px-4 py-1.5 rounded text-sm font-medium mb-6">
-                  {t.home.tagline}
-                </span>
-                <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6 leading-tight">
-                  Strategic Wealth for Discerning Investors
-                </h1>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
-                  {t.home.subtitle}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="group">
-                    {t.home.cta}
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition" />
-                  </Button>
-                  <Link href="/about">
-                    <Button size="lg" variant="outline">
-                      Learn More
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+    <main>
 
-              {/* Visual */}
-              <div className="hidden md:flex justify-end">
-                <div className="relative w-96 h-96 bg-gradient-to-br from-primary/5 to-secondary/5 rounded border border-border flex items-center justify-center group">
-                  <div className="text-center text-muted-foreground">
-                    <TrendingUp className="w-24 h-24 mx-auto mb-4 opacity-40 group-hover:opacity-60 transition" />
-                    <p className="text-sm">Portfolio Excellence</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+      {/* HERO SECTION */}
+      <section className="min-h-screen flex items-center bg-[#0B1C2D]">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <span className="inline-block bg-[#122B45] text-[#C6A55C] px-4 py-1.5 rounded text-sm font-medium mb-6">
+            {t.home.tagline}
+          </span>
+
+          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+            {t.home.title}
+          </h1>
+
+          <p className="text-lg text-gray-300 max-w-2xl mb-10">
+            {t.home.description}
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => router.push("/contact")}
+              className="bg-[#C6A55C] text-black px-6 py-3 font-medium hover:opacity-90 transition"
+            >
+              {t.home.schedule}
+            </button>
+
+            <button
+              onClick={() =>
+                document
+                  .getElementById("why")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="border border-[#C6A55C] px-6 py-3 font-medium hover:bg-[#C6A55C] hover:text-black transition"
+            >
+              {t.home.learn}
+            </button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Why Aurexia Section */}
-        <section className="py-24 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-playfair font-bold text-center mb-16">
-              Why Aurexia Capital
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Feature 1 */}
-              <div className="p-8 bg-background rounded border border-border hover:border-primary/30 transition group">
-                <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center mb-6 group-hover:bg-primary/20 transition">
-                  <TrendingUp className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-playfair font-semibold text-xl mb-3">
-                  {t.home.features.expertise}
-                </h3>
-                <p className="text-muted-foreground">
-                  {t.home.features.expertiseDesc}
-                </p>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="p-8 bg-background rounded border border-border hover:border-primary/30 transition group">
-                <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center mb-6 group-hover:bg-primary/20 transition">
-                  <Lock className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-playfair font-semibold text-xl mb-3">
-                  {t.home.features.security}
-                </h3>
-                <p className="text-muted-foreground">
-                  {t.home.features.securityDesc}
-                </p>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="p-8 bg-background rounded border border-border hover:border-primary/30 transition group">
-                <div className="w-12 h-12 bg-primary/10 rounded flex items-center justify-center mb-6 group-hover:bg-primary/20 transition">
-                  <FileText className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-playfair font-semibold text-xl mb-3">
-                  {t.home.features.research}
-                </h3>
-                <p className="text-muted-foreground">
-                  {t.home.features.researchDesc}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Preview */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-playfair font-bold text-center mb-16">
-              Comprehensive Advisory Services
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-playfair font-semibold mb-2">{t.services.portfolio}</h3>
-                  <p className="text-muted-foreground">{t.services.portfolioDesc}</p>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
-                    <Lock className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-playfair font-semibold mb-2">{t.services.risk}</h3>
-                  <p className="text-muted-foreground">{t.services.riskDesc}</p>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-playfair font-semibold mb-2">{t.services.tax}</h3>
-                  <p className="text-muted-foreground">{t.services.taxDesc}</p>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-playfair font-semibold mb-2">{t.services.succession}</h3>
-                  <p className="text-muted-foreground">{t.services.successionDesc}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-12">
-              <Link href="/services">
-                <Button variant="outline" size="lg">
-                  View All Services
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-24 bg-primary text-primary-foreground">
-          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-playfair font-bold mb-6">
-              Ready to Elevate Your Wealth Strategy?
-            </h2>
-            <p className="text-lg opacity-90 mb-8 leading-relaxed">
-              Schedule a consultation with our advisory team to discuss your financial objectives and discover how Aurexia Capital can help preserve and grow your wealth.
+      {/* WHY AUREXIA */}
+      <section id="why" className="bg-[#122B45] py-24">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+          <div>
+            <h3 className="text-xl font-semibold mb-4 text-[#C6A55C]">
+              Institutional Expertise
+            </h3>
+            <p className="text-gray-300">
+              20+ years managing substantial portfolios with
+              disciplined capital allocation and macro awareness.
             </p>
-            <Button size="lg" variant="secondary" className="group">
-              {t.home.cta}
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition" />
-            </Button>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-4 text-[#C6A55C]">
+              Secure & Compliant
+            </h3>
+            <p className="text-gray-300">
+              GDPR compliant with bank-grade security standards
+              protecting client assets and data.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-4 text-[#C6A55C]">
+              Proprietary Research
+            </h3>
+            <p className="text-gray-300">
+              Quarterly macroeconomic research and market outlook
+              reports guiding strategic investment decisions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES PREVIEW */}
+      <section className="bg-[#0B1C2D] py-24 border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-serif font-bold mb-12">
+            Comprehensive Advisory Services
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-8 text-left">
+            <div>
+              <h4 className="text-[#C6A55C] font-semibold mb-2">
+                Portfolio Management
+              </h4>
+              <p className="text-gray-400">
+                Tailored investment strategies aligned with client objectives.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-[#C6A55C] font-semibold mb-2">
+                Risk Advisory
+              </h4>
+              <p className="text-gray-400">
+                Comprehensive risk assessment and mitigation frameworks.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-[#C6A55C] font-semibold mb-2">
+                Tax Strategy
+              </h4>
+              <p className="text-gray-400">
+                Optimized tax planning across jurisdictions.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-[#C6A55C] font-semibold mb-2">
+                Succession Planning
+              </h4>
+              <p className="text-gray-400">
+                Multi-generational wealth transfer structures.
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => router.push("/services")}
+            className="mt-12 border border-[#C6A55C] px-6 py-3 font-medium hover:bg-[#C6A55C] hover:text-black transition"
+          >
+            View All Services
+          </button>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="bg-[#122B45] py-20 text-center">
+        <div className="max-w-3xl mx-auto px-6">
+          <h3 className="text-3xl font-serif font-bold mb-6">
+            Ready to Elevate Your Wealth Strategy?
+          </h3>
+
+          <p className="text-gray-300 mb-8">
+            Schedule a consultation with our advisory team to discuss your
+            financial objectives and discover how Aurexia Capital can help
+            preserve and grow your wealth.
+          </p>
+
+          <button
+            onClick={() => router.push("/contact")}
+            className="bg-[#C6A55C] text-black px-8 py-3 font-medium hover:opacity-90 transition"
+          >
+            Schedule Consultation
+          </button>
+        </div>
+      </section>
+
+    </main>
   )
 }
