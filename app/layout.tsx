@@ -1,7 +1,6 @@
-"use client"
 import "./globals.css"
 import { ReactNode } from "react"
-import { I18nProvider } from "@/lib/i18n"
+import Providers from "./providers"
 
 export const metadata = {
   title: "Aurexia Capital",
@@ -16,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <I18nProvider>
+        <Providers>
           {children}
-        </I18nProvider>
+        </Providers>
       </body>
     </html>
   )
