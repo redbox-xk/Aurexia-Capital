@@ -1,0 +1,3 @@
+export const OPM_TOKEN_ADDRESS =
+  (process.env.NEXT_PUBLIC_OPM_TOKEN_ADDRESS as `0x${string}`) ||
+  '0xE430b07F7B168E77B07b29482DbF89EafA53f484'
