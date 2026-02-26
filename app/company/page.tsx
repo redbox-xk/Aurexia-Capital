@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { companyProfile } from '@/lib/company/profile'
 import { Shield, Award, Users, Globe, TrendingUp, CheckCircle } from 'lucide-react'
+import { NewsletterSignup } from '@/components/newsletter-signup'
 
 export default function CompanyPage() {
   const { t } = useI18n()
@@ -229,6 +230,16 @@ export default function CompanyPage() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section className="py-16 bg-muted/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <NewsletterSignup 
+              title="Stay Updated"
+              description="Subscribe to our institutional insights, market analysis, and investment opportunities."
+            />
           </div>
         </section>
 

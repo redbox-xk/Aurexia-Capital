@@ -4,7 +4,8 @@ import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import { I18nProvider } from '@/lib/i18n/context'
 import { AuthProvider } from '@/lib/auth/auth-context'
-import { GDPRBanner } from '@/components/gdpr-banner'
+import { ConsentBanner } from '@/components/consent-banner'
+import { AnalyticsInitializer } from '@/components/analytics-initializer'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -58,11 +59,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'}');
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased bg-background text-foreground">
         <AuthProvider>
           <I18nProvider>
             {children}
-            <GDPRBanner />
+            <ConsentBanner />
+            <AnalyticsInitializer />
           </I18nProvider>
         </AuthProvider>
       </body>
